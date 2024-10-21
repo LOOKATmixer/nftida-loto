@@ -216,9 +216,10 @@ button {
   .header__container {
     flex-direction: column;
   }
-  body {
-    transform: scale(0.8);
-    margin-top: -180px;
-  }
 
+  .ticket-cell {
+    width: 32px;
+    height: 24px;
+    font-size: 14px;
+  }
 }
