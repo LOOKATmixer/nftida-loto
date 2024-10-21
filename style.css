@@ -216,9 +216,9 @@ button {
   .header__container {
     flex-direction: column;
   }
-  #tickets-container {
+  body {
     transform: scale(0.8);
-    margin-top: -160px;
+    margin-top: -180px;
   }
 
 }
