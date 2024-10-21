@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="style.css">
+    <title>nftida-loto</title>
+</head>
+<body>
+<header>
+    <div class="header__container">
+        <img class="header__logo" src="/images/logo.jpeg" alt="logo">
+        <button id="add-ticket-btn">Добавить билет</button>
+        <div class="search-area">
+            <input type="number" id="search-input" min="1" max="90" placeholder="Введите номер бочонка" />
+            <button id="search-btn" class="button">Искать</button>
+        </div>
+
+    </div>
+</header>
+<main>
+
+    <div id="lotto-app">
+        <div style="margin-bottom: 32px;" id="search-results"></div>
+        <div id="tickets-container"></div>
+        <button id="delete-all-tickets-btn" style="margin-top: 54px;" class="button button--red">Удалить все билеты</button>
+    </div>
+</main>
+<footer>
+    <!-- Модальное окно подтверждения удаления -->
+    <div id="confirm-delete-modal" class="modal">
+        <div class="modal-content">
+            <h4>Подтверждение удаления</h4>
+            <p>Вы уверены, что хотите удалить этот билет?</p>
+            <button id="confirm-delete-yes" class="button button--green">Удалить</button>
+            <button id="confirm-delete-no" class="button button--red">х</button>
+        </div>
+    </div>
+    <!-- Модальное окно для подтверждения удаления всех билетов -->
+    <div id="confirm-delete-all-modal" class="modal">
+        <div class="modal-content">
+            <h4>Подтверждение удаления всех билетов</h4>
+            <p>Вы уверены, что хотите удалить все билеты и историю выпавших бочонков?</p>
+            <button id="confirm-delete-all-yes" class="button button--red">Да</button>
+            <button id="confirm-delete-all-no" class="button button--default">Нет</button>
+        </div>
+    </div>
+</footer>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.12.0/tsparticles.confetti.bundle.min.js"></script>
+<script src="index.js"></script>
+</html>

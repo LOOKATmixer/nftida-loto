@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
+body {
+  background: #ffda03;
+  font-family: 'Montserrat', sans-serif;
+  line-height: 150%;
+  font-weight: 400;
+}
+
+#lotto-app {
+  text-align: center;
+  margin: 20px;
+}
+
+.header__container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.header__logo {
+  border-radius: 50%;
+  width: 100px;
+}
+
+// Общие стили для кнопок
+.button {
+  border-radius: 16px;
+  padding: 10px 20px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all 0.2s linear;
+
+  &--green {
+    background-color: #4CAF50;
+    color: white;
+
+    &:hover {
+      background-color: #45a049;
+    }
+  }
+
+  &--red {
+    background-color: #f44336; // Красный цвет для удаления
+    color: white;
+
+    &:hover {
+      background-color: #e53935; // Темно-красный при наведении
+    }
+  }
+
+  &--default {
+    background-color: #e0e0e0; // Цвет по умолчанию
+    color: black;
+
+    &:hover {
+      background-color: #d5d5d5; // Светло-серый при наведении
+    }
+  }
+}
+
+.search-area {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+#search-input {
+  border-radius: 16px;
+  min-height: 16px;
+  padding: 10px 20px;
+  border: 1px solid #ccc;
+  width: 100%;
+  min-width: 180px;
+  margin-right: 10px;
+}
+
+.search-item {
+  color: #e82930;
+  border-radius: 50%;
+  border: 1px solid #e82930;
+  background: #fff;
+  position: relative;
+  width: 48px;
+  height: 48px;
+
+  & span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+}
+
+#search-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+#add-ticket-btn {
+  border-radius: 16px;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  transition: all .2s linear;
+
+  &:hover {
+    background-color: #45a049;
+  }
+}
+
+#tickets-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.ticket {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 15px;
+  border-radius: 20px;
+  background: #fff;
+  width: fit-content;
+}
+
+.ticket h3 {
+  margin-bottom: 10px;
+}
+
+.ticket-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ticket-row {
+  display: flex;
+  gap: 5px;
+}
+
+.ticket-cell {
+  width: 42px;
+  height: 32px;
+  text-align: center;
+  font-size: 16px;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  -moz-appearance: textfield;
+}
+
+.ticket-cell::-webkit-outer-spin-button,
+.ticket-cell::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.edit-icon,
+.save-icon {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  position: absolute;
+  top: 16px;
+  right: 56px;
+  cursor: pointer;
+}
+
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Полупрозрачный фон */
+}
+
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: 15% auto; /* Центрируем модальное окно */
+  padding: 20px;
+  border: 1px solid #888;
+  width: 20%; /* Ширина модального окна */
+}
+
+#confirm-delete-no {
+  position: absolute;
+  top: -24px;
+  right: -24px;
+  border-radius: 50%;
+  padding: 8px 14px;
+}
+
+button {
+  margin: 5px;
+}
