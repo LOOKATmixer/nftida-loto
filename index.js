@@ -121,11 +121,36 @@ $(document).ready(function() {
         $('#search-results').empty(); // Очищаем предыдущие результаты
         if (searchHistory.length > 0) {
             $('#search-results').append('<h4>Выпавшие бочонки:</h4>');
-            searchHistory.forEach(function(num) {
-                $('#search-results').append(`<div class="search-item"><span>${num}</span></div>`);
+            searchHistory.forEach(function(num, index) {
+                $('#search-results').append(`
+                <div class="search-item">
+                    <span>${num}</span>
+                    <div class="remove-search-item" data-num="${num}" style="cursor: pointer; color: red;">❌</div>
+                </div>
+            `);
             });
         }
     }
+
+    // Удаление числа из истории поиска при нажатии на крестик
+    $(document).on('click', '.remove-search-item', function() {
+        const numToRemove = parseInt($(this).data('num'));
+
+        // Удаляем число из истории поиска
+        searchHistory = searchHistory.filter(num => num !== numToRemove);
+        localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); // Обновляем localStorage
+
+        // Обновляем результаты поиска
+        updateSearchResults();
+
+        // Убираем зеленую обводку с ячеек билетов, которые соответствуют удаленному числу
+        $('.ticket-cell').each(function() {
+            const cellValue = parseInt($(this).val());
+            if (cellValue === numToRemove) {
+                $(this).css('border', ''); // Убираем обводку
+            }
+        });
+    });
 
     // Редактирование билета
     $(document).on('click', '.edit-icon', function() {
