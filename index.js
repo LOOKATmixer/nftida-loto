@@ -8,8 +8,6 @@ $(document).ready(function() {
         $(this).removeClass("pressed");
     });
 
-
-
     $(".j-button-search").on("tap",function(){
         $(this).removeClass("pressed");
     });
@@ -51,7 +49,7 @@ $(document).ready(function() {
                 <h3>Билет № ${ticketId}
                     <span class="edit-icon" data-id="${ticketId}">✏️</span>
                     <span class="save-icon" data-id="${ticketId}" style="display: none;">💾</span>
-                    <span class="delete-icon" data-id="${ticketId}" style="color: red; cursor: pointer; display: none;">🗑️</span>
+                    <span class="delete-icon" data-id="${ticketId}" style="color: #AE2F27; cursor: pointer; display: none;">🗑️</span>
                 </h3>
                 <div class="ticket-area">
                     <div class="ticket-row">
@@ -100,6 +98,12 @@ $(document).ready(function() {
     }
 
     // Обработчик поиска числа
+    $('#search-input').on('keydown', function (event) {
+        if (event.key === 'Enter' || event.keyCode === 13) {
+            event.preventDefault(); // Предотвращаем стандартное поведение Enter (например, отправку формы)
+            $('#search-btn').trigger('click'); // Эмулируем клик по кнопке
+        }
+    });
     $('#search-btn').on('click', function() {
         const searchValue = $('#search-input').val().trim();
         const numValue = parseInt(searchValue);
@@ -151,12 +155,12 @@ $(document).ready(function() {
         if (searchHistory.length > 0) {
             $('#search-results').append('<h4 style="text-align: left;">Выпавшие бочонки:</h4>');
             searchHistory.forEach(function(entry) {
-                const сolor = entry.matched ? 'green' : 'red';
-                const border = entry.matched ? '2px solid green' : '2px solid red';
+                const сolor = entry.matched ? 'green' : '#AE2F27';
+                const border = entry.matched ? '2px solid green' : '2px solid #AE2F27';
                 $('#search-results').append(`
                 <div class="search-item" style="color: ${сolor}; border: ${border};">
                     <span>${entry.num}</span>
-                    <div class="remove-search-item" data-num="${entry.num}" style="cursor: pointer; color: red;">❌</div>
+                    <div class="remove-search-item" data-num="${entry.num}" style="cursor: pointer; color: #AE2F27;">❌</div>
                 </div>
             `);
             });

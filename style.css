@@ -1,7 +1,12 @@
 @charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap");
+*, *:before, *:after {
+  box-sizing: inherit;
+}
 body {
-  background: #ffda03;
+  margin: 0;
+  padding: 0;
+  background: #f0f0d8;
   font-family: "Montserrat", sans-serif;
   line-height: 150%;
   font-weight: 400;
@@ -9,13 +14,13 @@ body {
 
 #lotto-app {
   text-align: center;
-  margin: 20px;
 }
 
 .header__container {
+  padding: 16px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   gap: 32px;
 }
 
@@ -55,11 +60,11 @@ body {
   background-color: #45a049;
 }
 .button--red {
-  background-color: #f44336;
+  background-color: #AE2F27;
   color: white;
 }
 .button--red:hover {
-  background-color: #e53935;
+  background-color: #AE2F27;
 }
 .button--default {
   background-color: #e0e0e0;
@@ -83,23 +88,24 @@ body {
   border: 2px solid #ccc;
   width: 100%;
   min-width: 200px;
-  margin-right: 10px;
 }
 #search-input::placeholder {
   font-size: 16px;
 }
-#search-input:focus {
+#search-input:focus,
+input:focus {
   outline: none;
 }
+input:focus,
 #search-input:focus, #search-input:active {
   border: 2px solid #45a049; /* Замените на нужный цвет */
   box-shadow: 0 0 5px rgba(69, 160, 73, 0.5); /* Мягкое свечение */
 }
 
 .search-item {
-  color: #e82930;
+  color: #AE2F27;
   border-radius: 50%;
-  border: 1px solid #e82930;
+  border: 1px solid #AE2F27;
   background: #fff;
   position: relative;
   width: 48px;
@@ -132,9 +138,9 @@ body {
 }
 
 #search-results {
+  margin: 16px 0 32px;
   display: flex;
   align-items: center;
-  justify-content: center;
   gap: 16px;
   flex-wrap: wrap;
 }
@@ -153,8 +159,15 @@ body {
   background-color: #45a049;
 }
 
+.center-wrapper {
+  max-width: 1384px;
+  padding: 0 16px;
+  margin: 0 auto;
+}
+
 #tickets-container {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
@@ -254,20 +267,190 @@ button {
   margin: 5px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1400px) {
+  .center-wrapper {
+    max-width: 1000px;
+  }
+  #tickets-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .center-wrapper {
+    max-width: 448px;
+  }
+  #tickets-container {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
   .modal-content {
     width: 80vw;
   }
 }
 
 @media screen and (max-width: 767px) {
-  .header__container {
-    flex-direction: column;
-  }
-
   .ticket-cell {
     width: 32px;
     height: 24px;
     font-size: 14px;
   }
 }
+
+/* Бургер меню */
+
+.burger-checkbox {
+  position: absolute;
+  visibility: hidden;
+}
+.burger {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+  display: block;
+  position: relative;
+  border: none;
+  background: transparent;
+  width: 40px;
+  height: 26px;
+}
+.burger::before,
+.burger::after {
+  content: '';
+  left: 0;
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 10px;
+  background: #000;
+}
+.burger::before {
+  top: 0;
+  box-shadow: 0 11px 0 #000;
+  transition: box-shadow .3s .15s, top .3s .15s, transform .3s;
+}
+.burger::after {
+  bottom: 0;
+  transition: bottom .3s .15s, transform .3s;
+}
+.burger-checkbox:checked + .burger::before {
+  top: 11px;
+  transform: rotate(45deg);
+  box-shadow: 0 6px 0 rgba(0,0,0,0);
+  transition: box-shadow .15s, top .3s, transform .3s .15s;
+}
+.burger-checkbox:checked + .burger::after {
+  bottom: 11px;
+  transform: rotate(-45deg);
+  transition: bottom .3s, transform .3s .15s;
+}
+.menu-list {
+  top: 50%;
+  right: 16px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 0;
+  list-style-type: none;
+  transform: translate(100%, -50%);
+  transition: .3s;
+  width: 200px;
+  z-index: 10;
+}
+.menu-item {
+  display: block;
+  padding: 8px;
+  color: white;
+  font-size: 18px;
+  text-align: center;
+  text-decoration: none;
+}
+.menu-item:hover {
+  background: rgba(255,255,255,.2)
+}
+.burger-checkbox:checked ~ .menu-list {
+  transform: translate(0, -50%);
+}
+
+/* Бургер меню end */
+
+
+/*  Новый год  */
+
+.tree {
+  z-index: -1;
+  position: fixed;
+  left: 68px;
+  bottom: 48px;
+  margin: 2em auto 6em;
+  height: 1em;
+  width: 1em;
+  transform: scale(1.4) rotate(45deg);
+  background: #A7BA59;
+  box-shadow: 1em 1em 0 #a1b64e, 2em 2em 0 #99ad48, 3em 3em 0 #8fa243, 4em 4em 0 #86973f, 0em 1em 0 #A7BA59, 1em 0em 0 #A7BA59, 1em 2em 0 #a1b64e, 2em 1em 0 #a1b64e, 3em 1em 0 #99ad48, 1em 3em 0 #99ad48, 2em 3em 0 #99ad48, 3em 2em 0 #99ad48, 4em 2em 0 #8fa243, 2em 4em 0 #8fa243, 3em 4em 0 #8fa243, 4em 3em 0 #8fa243, 5em 2em 0 #86973f, 2em 5em 0 #86973f, 3em 5em 0 #86973f, 5em 3em 0 #86973f;
+}
+.tree:before {
+  content: "";
+  display: block;
+  position: relative;
+  top: -0.05em;
+  left: -0.05em;
+  width: 0.3em;
+  height: 0.3em;
+  border-radius: 50%;
+  background: #e58f89;
+  animation: blink_lights 1.2s linear 0s infinite alternate both;
+}
+.tree:after {
+  position: absolute;
+  content: "";
+  z-index: 1;
+  left: 4.5em;
+  bottom: -4.5em;
+  width: 0;
+  height: 0;
+  border: 0.5em solid #5b1814;
+  border-width: 0.5em;
+  border-top-color: transparent;
+  transform: rotate(-45deg);
+  display: block;
+}
+
+@keyframes blink_lights {
+  0%, 49% {
+    background-color: #d7534b;
+    box-shadow: 1em 1em 0 #d7534b, 2em 2em 0 #d7534b, 3em 3em 0 #d7534b, 4em 4em 0 #d7534b, 0em 1em 0 #AE2F27, 1em 0em 0 #AE2F27, 1em 2em 0 #AE2F27, 2em 1em 0 #AE2F27, 3em 1em 0 #d7534b, 1em 3em 0 #d7534b, 2em 3em 0 #AE2F27, 3em 2em 0 #AE2F27, 4em 2em 0 #d7534b, 2em 4em 0 #d7534b, 3em 4em 0 #AE2F27, 4em 3em 0 #AE2F27, 5em 2em 0 #AE2F27, 2em 5em 0 #AE2F27, 3em 5em 0 #d7534b, 5em 3em 0 #d7534b;
+  }
+  50%, 100% {
+    background-color: #AE2F27;
+    box-shadow: 1em 1em 0 #AE2F27, 2em 2em 0 #AE2F27, 3em 3em 0 #AE2F27, 4em 4em 0 #AE2F27, 0em 1em 0 #d7534b, 1em 0em 0 #d7534b, 1em 2em 0 #d7534b, 2em 1em 0 #d7534b, 3em 1em 0 #AE2F27, 1em 3em 0 #AE2F27, 2em 3em 0 #d7534b, 3em 2em 0 #d7534b, 4em 2em 0 #AE2F27, 2em 4em 0 #AE2F27, 3em 4em 0 #d7534b, 4em 3em 0 #d7534b, 5em 2em 0 #d7534b, 2em 5em 0 #d7534b, 3em 5em 0 #AE2F27, 5em 3em 0 #AE2F27;
+  }
+}
+body:before {
+  content: "❅";
+  z-index: 9;
+  position: absolute;
+  top: 50%;
+  left: -50%;
+  height: 10px;
+  width: 10px;
+  background: white;
+  border-radius: 50%;
+  text-shadow: 0px 0px white, 60vmax -15vmax 3px white, 31vmax -12vmax 2px white, 149vmax -111vmax 1px white, 98vmax 14vmax 1px white, -130vmax 99vmax 2px white, -110vmax 113vmax 2px white, -4vmax 122vmax 2px white, 18vmax -37vmax 0px white, 90vmax 57vmax 0px white, -88vmax -142vmax 2px white, -12vmax -74vmax 2px white, 88vmax 149vmax 3px white, 142vmax 143vmax 3px white, 68vmax -91vmax 2px white, 63vmax -17vmax 0px white, 104vmax -70vmax 3px white, -123vmax -80vmax 0px white, -129vmax -27vmax 1px white, 102vmax 32vmax 0px white, 117vmax -23vmax 3px white, 15vmax 110vmax 0px white, -4vmax 82vmax 2px white, 147vmax -126vmax 3px white, -54vmax -62vmax 2px white, 99vmax -60vmax 0px white, 119vmax -90vmax 1px white, -84vmax -19vmax 0px white, -34vmax 37vmax 3px white, -49vmax -73vmax 3px white, 99vmax 97vmax 1px white, 0vmax -17vmax 3px white, 107vmax 86vmax 0px white, 50vmax 26vmax 2px white, 104vmax 135vmax 2px white, -50vmax 118vmax 0px white, -129vmax 75vmax 0px white, -112vmax -114vmax 2px white, 80vmax 72vmax 0px white, 26vmax 118vmax 0px white, 141vmax 101vmax 2px white, 133vmax -134vmax 1px white, 46vmax -134vmax 3px white, -116vmax 127vmax 3px white, -26vmax -87vmax 2px white, 0vmax -59vmax 3px white, 113vmax -148vmax 0px white, 111vmax -66vmax 0px white, -76vmax -47vmax 0px white, -142vmax 121vmax 3px white, -88vmax -85vmax 0px white, 98vmax 33vmax 1px white, -34vmax -77vmax 3px white, -13vmax -82vmax 3px white, -14vmax 2vmax 1px white, -148vmax -79vmax 3px white, -87vmax 2vmax 2px white, 8vmax -76vmax 1px white, -8vmax 14vmax 3px white, 12vmax -140vmax 1px white, 39vmax -6vmax 2px white, 108vmax -27vmax 3px white, -38vmax 145vmax 1px white, 51vmax -12vmax 2px white, 10vmax -8vmax 2px white, 142vmax 16vmax 1px white, -1vmax -76vmax 0px white, -53vmax 41vmax 2px white, 111vmax -74vmax 2px white, 85vmax 42vmax 3px white, 150vmax -13vmax 1px white, -136vmax 43vmax 2px white, 134vmax -134vmax 0px white, 18vmax -22vmax 3px white, 46vmax 91vmax 2px white, 24vmax -67vmax 1px white, -95vmax -89vmax 1px white, 55vmax -26vmax 1px white, 78vmax 44vmax 1px white, -136vmax -33vmax 1px white, -71vmax -141vmax 0px white, 104vmax 69vmax 0px white, -20vmax -147vmax 0px white, -131vmax -119vmax 3px white, 25vmax 37vmax 0px white, -73vmax 62vmax 0px white, 116vmax -43vmax 3px white, -15vmax 52vmax 2px white, 8vmax 39vmax 0px white, 110vmax 105vmax 2px white, 77vmax -22vmax 3px white, -62vmax -72vmax 2px white, -33vmax -71vmax 2px white, 25vmax -51vmax 2px white, -38vmax 118vmax 3px white, -115vmax -37vmax 1px white, 52vmax -149vmax 2px white, -5vmax -60vmax 0px white, -50vmax 106vmax 2px white, 4vmax 62vmax 1px white, 91vmax 95vmax 3px white, -122vmax -24vmax 1px white, 105vmax -49vmax 0px white, 16vmax 81vmax 3px white, -129vmax -139vmax 3px white, 112vmax -34vmax 2px white, -4vmax -83vmax 1px white, -21vmax -99vmax 1px white, -52vmax -4vmax 2px white, 83vmax -81vmax 1px white, -16vmax -122vmax 2px white, -57vmax -88vmax 3px white, 77vmax 99vmax 0px white, -107vmax -139vmax 0px white, -72vmax 83vmax 0px white, 67vmax -106vmax 0px white, -131vmax -13vmax 1px white, -133vmax 8vmax 3px white, 124vmax -52vmax 2px white, -90vmax 115vmax 2px white, 23vmax 30vmax 2px white, 12vmax -10vmax 2px white, 49vmax 111vmax 2px white, -44vmax -80vmax 1px white, 6vmax 62vmax 0px white, -102vmax 83vmax 3px white, 103vmax 105vmax 1px white, -147vmax 3vmax 3px white, -147vmax -117vmax 3px white, -77vmax 35vmax 3px white, 34vmax 27vmax 0px white, 125vmax 77vmax 3px white, 13vmax 32vmax 3px white, -23vmax -100vmax 3px white, -94vmax -130vmax 2px white, 122vmax -146vmax 1px white, -127vmax -88vmax 3px white, 34vmax -125vmax 0px white, 141vmax -118vmax 1px white, -92vmax -64vmax 2px white, -63vmax 25vmax 1px white, -130vmax -104vmax 3px white, 86vmax -79vmax 2px white, 95vmax 9vmax 1px white, 93vmax -98vmax 2px white, 55vmax 134vmax 2px white, -53vmax -15vmax 2px white, 45vmax 37vmax 3px white, 96vmax -91vmax 2px white, 16vmax -111vmax 0px white, -41vmax 33vmax 3px white, 69vmax -40vmax 2px white, 88vmax -23vmax 2px white, 129vmax -117vmax 0px white, 132vmax -113vmax 3px white, -2vmax -90vmax 2px white, -136vmax -104vmax 2px white, 11vmax -78vmax 1px white, 76vmax -43vmax 0px white, 37vmax 50vmax 1px white, -146vmax 118vmax 2px white, 34vmax -106vmax 1px white, -60vmax 106vmax 0px white, -2vmax -17vmax 0px white, -72vmax -52vmax 3px white, -53vmax 87vmax 2px white, 71vmax -135vmax 1px white, -147vmax -92vmax 1px white, -86vmax -136vmax 3px white, 126vmax -51vmax 0px white, -125vmax 35vmax 0px white, -93vmax -129vmax 1px white, -89vmax -141vmax 0px white, 134vmax 99vmax 1px white, -37vmax 5vmax 1px white, 28vmax -28vmax 3px white, -116vmax -87vmax 2px white, 91vmax 146vmax 1px white, 39vmax -32vmax 2px white, -20vmax -148vmax 1px white, -80vmax -19vmax 2px white, 102vmax -51vmax 2px white, 132vmax -118vmax 1px white, -24vmax -24vmax 1px white, 97vmax -48vmax 2px white, -16vmax 130vmax 3px white, -98vmax -61vmax 1px white, -100vmax 36vmax 0px white, -101vmax -103vmax 2px white, 50vmax 103vmax 3px white, 48vmax 44vmax 1px white, 51vmax -138vmax 2px white, 147vmax -146vmax 2px white, 28vmax -98vmax 3px white, -30vmax -36vmax 2px white, -83vmax 57vmax 2px white, 41vmax 122vmax 3px white, 148vmax 82vmax 1px white, 66vmax -105vmax 0px white, 88vmax -129vmax 3px white, -109vmax -126vmax 1px white, -105vmax -141vmax 0px white, -40vmax -33vmax 3px white, -18vmax 10vmax 0px white, 112vmax 86vmax 3px white, 125vmax 31vmax 2px white, 144vmax -21vmax 1px white, -123vmax 77vmax 3px white, 99vmax -50vmax 1px white, -19vmax 104vmax 2px white, -8vmax 24vmax 0px white, 71vmax -113vmax 2px white, -131vmax 1vmax 3px white, -147vmax 97vmax 2px white, -71vmax -58vmax 1px white, -56vmax 108vmax 0px white, -83vmax 49vmax 1px white, 16vmax 116vmax 1px white, 36vmax 3vmax 0px white, 71vmax 140vmax 3px white, 84vmax -1vmax 0px white, -78vmax -60vmax 2px white, 111vmax -140vmax 2px white, -145vmax -139vmax 1px white, -97vmax -83vmax 1px white, -113vmax -123vmax 1px white, 137vmax -130vmax 1px white, 93vmax 82vmax 0px white, -18vmax -23vmax 1px white, 72vmax -100vmax 1px white, 101vmax -40vmax 0px white, -8vmax -2vmax 2px white, 79vmax -8vmax 0px white, -127vmax -94vmax 0px white, 6vmax 123vmax 2px white, -120vmax 1vmax 0px white, 90vmax -106vmax 0px white, 68vmax -121vmax 2px white, -39vmax -112vmax 1px white, 94vmax 17vmax 0px white, 46vmax -86vmax 0px white, 3vmax -84vmax 2px white, -1vmax -35vmax 2px white, 76vmax -19vmax 0px white, -75vmax 139vmax 2px white, -9vmax -37vmax 3px white, 116vmax -92vmax 3px white, -143vmax -83vmax 3px white, -134vmax 96vmax 2px white, -61vmax 31vmax 1px white, 123vmax 63vmax 2px white, 58vmax 106vmax 1px white, 88vmax -28vmax 1px white, 35vmax 134vmax 0px white, -117vmax 48vmax 2px white, 97vmax 12vmax 2px white, 92vmax 4vmax 3px white, -140vmax -67vmax 0px white, -82vmax 81vmax 2px white, -103vmax 91vmax 2px white, -69vmax 45vmax 1px white, 68vmax -110vmax 2px white, 141vmax -74vmax 1px white, -3vmax -133vmax 0px white, -47vmax -104vmax 0px white, -99vmax 88vmax 1px white, 138vmax 137vmax 3px white, -30vmax -49vmax 0px white, -53vmax -120vmax 1px white, 63vmax 65vmax 3px white, 100vmax -29vmax 0px white, -89vmax 38vmax 0px white, -149vmax 87vmax 1px white, 9vmax -90vmax 3px white, 105vmax -62vmax 3px white, -67vmax -146vmax 0px white, -105vmax -29vmax 1px white, -8vmax 129vmax 2px white, 13vmax -96vmax 1px white, 100vmax 120vmax 0px white, 28vmax 12vmax 1px white, -55vmax 139vmax 3px white, -146vmax 34vmax 0px white, -95vmax -104vmax 2px white, 72vmax 17vmax 1px white, 115vmax -27vmax 0px white, -45vmax 85vmax 0px white, -119vmax -8vmax 0px white, 14vmax 114vmax 2px white, 2vmax 81vmax 1px white, -136vmax 103vmax 1px white, -42vmax -26vmax 3px white, -81vmax -110vmax 0px white, 12vmax -103vmax 3px white, -140vmax 10vmax 0px white, -122vmax -149vmax 2px white, 1vmax 24vmax 0px white, 94vmax 145vmax 0px white, 35vmax 11vmax 0px white, 49vmax -35vmax 3px white, -40vmax 137vmax 2px white;
+  animation: snow 100s linear 0s infinite normal;
+}
+
+@keyframes snow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*  Новый год end  */

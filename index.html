@@ -21,21 +21,30 @@
         <a href="/">
             <img class="header__logo" src="./images/logo.jpeg" alt="logo">
         </a>
-        <button id="add-ticket-btn" class="button">Добавить билет</button>
-        <div class="search-area">
-            <input type="number" id="search-input" min="1" max="90" placeholder="Введите номер бочонка" />
-            <button id="search-btn" class="button button-search j-button-search">Искать</button>
+
+        <div class="menu">
+            <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
+            <label for="burger-checkbox" class="burger"></label>
+            <ul class="menu-list">
+                <li><button id="add-ticket-btn" class="button">Добавить билет</button></li>
+                <li><button id="delete-all-tickets-btn" class="button button--red">Удалить все билеты</button><li>
+            </ul>
         </div>
 
     </div>
 </header>
 <main>
-
-    <div id="lotto-app">
-        <div style="margin-bottom: 32px;" id="search-results"></div>
-        <div id="tickets-container"></div>
-        <button id="delete-all-tickets-btn" style="margin-top: 54px;" class="button button--red">Удалить все билеты</button>
+    <div class="center-wrapper">
+        <div class="search-area">
+            <input type="number" id="search-input" min="1" max="90" placeholder="Введите номер бочонка" />
+            <button id="search-btn" class="button button-search j-button-search">Искать</button>
+        </div>
+        <div id="lotto-app">
+            <div id="search-results"></div>
+            <div id="tickets-container"></div>
+        </div>
     </div>
+    <div class="tree"></div>
 </main>
 <footer>
     <!-- Модальное окно подтверждения удаления -->
