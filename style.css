@@ -23,7 +23,6 @@ body {
   border-radius: 50%;
   width: 100px;
 }
-
 .button {
   border-radius: 16px;
   padding: 10px 20px;
@@ -31,6 +30,22 @@ body {
   cursor: pointer;
   font-size: 16px;
   transition: all 0.2s linear;
+}
+.button-search {
+  color: #45a049;
+  background: #fff;
+  text-decoration: none;
+  display: inline-block;
+  perspective: 1000px;
+  transform-origin: center bottom 0px;
+  transform: matrix(1, 0, 0, 1, 0, 0);
+}
+.button-search:hover {
+  background: #45a049;
+  color: white;
+}
+.pressed {
+  transform: matrix(0.95, 0, 0, 0.95, 0, 0);
 }
 .button--green {
   background-color: #4CAF50;
@@ -65,10 +80,20 @@ body {
   border-radius: 16px;
   min-height: 16px;
   padding: 10px 20px;
-  border: 1px solid #ccc;
+  border: 2px solid #ccc;
   width: 100%;
-  min-width: 180px;
+  min-width: 200px;
   margin-right: 10px;
+}
+#search-input::placeholder {
+  font-size: 16px;
+}
+#search-input:focus {
+  outline: none;
+}
+#search-input:focus, #search-input:active {
+  border: 2px solid #45a049; /* Замените на нужный цвет */
+  box-shadow: 0 0 5px rgba(69, 160, 73, 0.5); /* Мягкое свечение */
 }
 
 .search-item {

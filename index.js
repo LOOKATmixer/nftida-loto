@@ -1,4 +1,23 @@
 $(document).ready(function() {
+
+    $(".j-button-search").mousedown(function(){
+        $(this).addClass("pressed");
+    });
+
+    $(".j-button-search").mouseup(function(){
+        $(this).removeClass("pressed");
+    });
+
+
+
+    $(".j-button-search").on("tap",function(){
+        $(this).removeClass("pressed");
+    });
+
+    $(".j-button-search").mouseout(function(){
+        $(this).removeClass("pressed");
+    });
+    
     let ticketCount = localStorage.getItem('ticketCount') ? parseInt(localStorage.getItem('ticketCount')) : 0;
     let searchHistory = JSON.parse(localStorage.getItem('searchHistory')) || []; // Загружаем историю из localStorage
 
@@ -29,7 +48,7 @@ $(document).ready(function() {
     function appendTicket(ticketData = null, ticketId) {
         let ticketHTML = `
             <div class="ticket" id="ticket-${ticketId}">
-                <h3>Билет ${ticketId}
+                <h3>Билет № ${ticketId}
                     <span class="edit-icon" data-id="${ticketId}">✏️</span>
                     <span class="save-icon" data-id="${ticketId}" style="display: none;">💾</span>
                     <span class="delete-icon" data-id="${ticketId}" style="color: red; cursor: pointer; display: none;">🗑️</span>
@@ -90,6 +109,8 @@ $(document).ready(function() {
             return;
         }
 
+        let foundMatch = false; // Флаг для проверки совпадений
+
         // Проверяем, есть ли число в билетах и обводим инпуты
         $('.ticket-cell').each(function() {
             const cellValue = $(this).val();
@@ -97,17 +118,25 @@ $(document).ready(function() {
 
             // Проверяем, совпадает ли значение, и обводим зеленым, если еще не обведено
             if (cellValue == numValue && currentBorderColor !== 'green') {
+                foundMatch = true;
                 $(this).css('border', '2px solid green'); // Обводим зеленым
                 launchConfettiForCell(this);
                 // Запуск конфетти для совпавшей ячейки
             }
         });
 
-        // Запоминаем число в истории поиска
-        if (!searchHistory.includes(numValue)) {
-            searchHistory.push(numValue);
+        // Обновляем историю поиска с состоянием
+        const existingEntry = searchHistory.find(item => item.num === numValue);
+        if (!existingEntry) {
+            searchHistory.push({ num: numValue, matched: foundMatch });
             localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
         }
+
+        // // Запоминаем число в истории поиска
+        // if (!searchHistory.includes(numValue)) {
+        //     searchHistory.push(numValue);
+        //     localStorage.setItem('searchHistory', JSON.stringify(searchHistory));
+        // }
 
         // Обновление результатов поиска
         updateSearchResults();
@@ -120,12 +149,14 @@ $(document).ready(function() {
     function updateSearchResults() {
         $('#search-results').empty(); // Очищаем предыдущие результаты
         if (searchHistory.length > 0) {
-            $('#search-results').append('<h4>Выпавшие бочонки:</h4>');
-            searchHistory.forEach(function(num, index) {
+            $('#search-results').append('<h4 style="text-align: left;">Выпавшие бочонки:</h4>');
+            searchHistory.forEach(function(entry) {
+                const сolor = entry.matched ? 'green' : 'red';
+                const border = entry.matched ? '2px solid green' : '2px solid red';
                 $('#search-results').append(`
-                <div class="search-item">
-                    <span>${num}</span>
-                    <div class="remove-search-item" data-num="${num}" style="cursor: pointer; color: red;">❌</div>
+                <div class="search-item" style="color: ${сolor}; border: ${border};">
+                    <span>${entry.num}</span>
+                    <div class="remove-search-item" data-num="${entry.num}" style="cursor: pointer; color: red;">❌</div>
                 </div>
             `);
             });
@@ -137,7 +168,7 @@ $(document).ready(function() {
         const numToRemove = parseInt($(this).data('num'));
 
         // Удаляем число из истории поиска
-        searchHistory = searchHistory.filter(num => num !== numToRemove);
+        searchHistory = searchHistory.filter(entry => entry.num !== numToRemove);
         localStorage.setItem('searchHistory', JSON.stringify(searchHistory)); // Обновляем localStorage
 
         // Обновляем результаты поиска
