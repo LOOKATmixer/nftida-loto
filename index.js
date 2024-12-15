@@ -47,9 +47,9 @@ $(document).ready(function() {
         let ticketHTML = `
             <div class="ticket" id="ticket-${ticketId}">
                 <h3>Билет № ${ticketId}
-                    <span class="edit-icon" data-id="${ticketId}">✏️</span>
-                    <span class="save-icon" data-id="${ticketId}" style="display: none;">💾</span>
-                    <span class="delete-icon" data-id="${ticketId}" style="color: #AE2F27; cursor: pointer; display: none;">🗑️</span>
+                    <span class="edit-icon fa-regular fa-pen-to-square" data-id="${ticketId}"></span>
+                    <span class="save-icon fa-regular fa-floppy-disk" data-id="${ticketId}" style="display: none;"></span>
+                    <span class="delete-icon fa-regular fa-trash" data-id="${ticketId}" style="color: #AE2F27; cursor: pointer; display: none;"></span>
                 </h3>
                 <div class="ticket-area">
                     <div class="ticket-row">
@@ -160,7 +160,7 @@ $(document).ready(function() {
                 $('#search-results').append(`
                 <div class="search-item" style="color: ${сolor}; border: ${border};">
                     <span>${entry.num}</span>
-                    <div class="remove-search-item" data-num="${entry.num}" style="cursor: pointer; color: #AE2F27;">❌</div>
+                    <div class="remove-search-item fa-regular fa-trash fa-lg" data-num="${entry.num}" style="cursor: pointer; color: #AE2F27;"></div>
                 </div>
             `);
             });

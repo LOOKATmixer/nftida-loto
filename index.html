@@ -13,6 +13,7 @@
     <link rel="manifest" href="./favicon/site.webmanifest" />
 
     <link rel="stylesheet" href="style.css?v=3">
+    <link rel="stylesheet" href="./plugins/font-awesome/6.0.0/css/all.min.css">
     <title>nftida-loto</title>
 </head>
 <body>
@@ -26,8 +27,8 @@
             <input type="checkbox" id="burger-checkbox" class="burger-checkbox">
             <label for="burger-checkbox" class="burger"></label>
             <ul class="menu-list">
-                <li><button id="add-ticket-btn" class="button">Добавить билет</button></li>
-                <li><button id="delete-all-tickets-btn" class="button button--red">Удалить все билеты</button><li>
+                <li><button id="add-ticket-btn" class="button button-round"><div class="fa-regular fa-plus fa-xl"></div></button></li>
+                <li><button id="delete-all-tickets-btn" class="button button-round button--red"><div class="fa-regular fa-trash fa-xl"></div></button><li>
             </ul>
         </div>
 
@@ -53,7 +54,7 @@
             <h4>Подтверждение удаления</h4>
             <p>Вы уверены, что хотите удалить этот билет?</p>
             <button id="confirm-delete-yes" class="button button--green">Удалить</button>
-            <button id="confirm-delete-no" class="button button--red">х</button>
+            <button id="confirm-delete-no" class="button button--red button-round fa-regular fa-xmark"></button>
         </div>
     </div>
     <!-- Модальное окно для подтверждения удаления всех билетов -->

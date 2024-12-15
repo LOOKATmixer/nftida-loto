@@ -36,6 +36,10 @@ body {
   font-size: 16px;
   transition: all 0.2s linear;
 }
+.button.button-round {
+  border-radius: 50%;
+  padding: 20px;
+}
 .button-search {
   color: #45a049;
   background: #fff;
@@ -119,22 +123,23 @@ input:focus,
 }
 
 .search-item:hover .remove-search-item {
-  display: block;
+  opacity: 1;
+  visibility: visible;
 }
 
 .remove-search-item {
-  display: none;
   position: absolute;
-  top: -14px;
-  right: -14px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   cursor: pointer;
-  width: 20px;
-  height: 20px;
-  padding: 4px;
+  padding: 22px 15px;
   border-radius: 50%;
   background: #fff;
-  font-size: 12px;
   line-height: 18px;
+  transition: all .2s linear;
+  opacity: 0;
+  visibility: hidden;
 }
 
 #search-results {
@@ -146,8 +151,8 @@ input:focus,
 }
 
 #add-ticket-btn {
-  border-radius: 16px;
-  padding: 10px 20px;
+  border-radius: 50%;
+  padding: 20px;
   background-color: #4CAF50;
   color: white;
   border: none;
@@ -163,6 +168,7 @@ input:focus,
   max-width: 1384px;
   padding: 0 16px;
   margin: 0 auto;
+  overflow: hidden;
 }
 
 #tickets-container {
@@ -171,6 +177,7 @@ input:focus,
   flex-wrap: wrap;
   gap: 20px;
   justify-content: center;
+  margin-bottom: 100px;
 }
 
 .ticket {
@@ -257,10 +264,10 @@ input:focus,
 
 #confirm-delete-no {
   position: absolute;
-  top: -24px;
-  right: -24px;
+  top: -16px;
+  right: -16px;
   border-radius: 50%;
-  padding: 8px 14px;
+  padding: 6px 10px;
 }
 
 button {
@@ -271,14 +278,15 @@ button {
   .center-wrapper {
     max-width: 1000px;
   }
-  #tickets-container {
-    grid-template-columns: repeat(2, 1fr);
+  .ticket-cell {
+    width: 28px;
+    font-size: 14px;
   }
 }
 
-@media screen and (max-width: 940px) {
+@media screen and (max-width: 1032px) {
   .center-wrapper {
-    max-width: 448px;
+    max-width: 664px;
   }
   #tickets-container {
     display: flex;
@@ -291,11 +299,14 @@ button {
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 695px) {
+  .center-wrapper {
+    max-width: 100%;
+  }
   .ticket-cell {
-    width: 32px;
-    height: 24px;
-    font-size: 14px;
+    width: 38px;
+    height: 32px;
+    font-size: 16px;
   }
 }
 
@@ -347,19 +358,23 @@ button {
   transform: rotate(-45deg);
   transition: bottom .3s, transform .3s .15s;
 }
+.menu {
+  padding-right: 16px;
+  position: relative;
+}
 .menu-list {
-  top: 50%;
-  right: 16px;
+  top: 66px;
+  right: 0;
   position: absolute;
-  display: flex;
   flex-direction: column;
   gap: 16px;
   margin: 0;
   list-style-type: none;
-  transform: translate(100%, -50%);
   transition: .3s;
-  width: 200px;
   z-index: 10;
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 .menu-item {
   display: block;
@@ -373,7 +388,9 @@ button {
   background: rgba(255,255,255,.2)
 }
 .burger-checkbox:checked ~ .menu-list {
-  transform: translate(0, -50%);
+  opacity: 1;
+  pointer-events: all;
+  visibility: visible;
 }
 
 /* Бургер меню end */
