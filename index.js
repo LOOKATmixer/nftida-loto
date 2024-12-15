@@ -1,5 +1,13 @@
 $(document).ready(function() {
 
+    var o = "padding: 10px; color: #fff; background-color: #ff2c2c;",
+        b = "padding: 20px 0; color: #fff; background-color: rgba(255, 255, 255 0);",
+        a = "padding: 10px 0; color: #fff; background-color: rgba(255, 255, 255 0);",
+        c = "padding: 20px; color: #fff; background-color: #000;";
+
+    // девятая строка
+    console.log("%cDeveloped by", a), console.log("%c@mynumbernine", o), console.log("%chttps://t.me/mynumbernine/", b);
+
     $(".j-button-search").mousedown(function(){
         $(this).addClass("pressed");
     });
@@ -276,12 +284,17 @@ $(document).ready(function() {
             searchHistory = JSON.parse(savedSearchHistory);
             updateSearchResults(); // Выводим историю поиска
 
+            // Фильтруем только числа с matched = true
+            const matchedNumbers = searchHistory
+                .filter(item => item.matched) // Берем только объекты с matched = true
+                .map(item => item.num); // Извлекаем их числа
+
             // Обводим числа в билетах, если они есть в истории поиска
             $('.ticket-cell').each(function() {
                 const cellValue = parseInt($(this).val());
 
                 // Проверяем, есть ли значение ячейки в истории поиска
-                if (searchHistory.includes(cellValue)) {
+                if (matchedNumbers.includes(cellValue)) {
                     $(this).css('border', '2px solid green'); // Обводим зеленым, если совпадает
                 }
             });
